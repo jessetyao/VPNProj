@@ -1,23 +1,37 @@
 import socket
 import threading
-from encrypt import xor_encrypt_decrypt
+from encrypt import derive_aes_key, aes_decrypt
+from dh import generate_prime, get_private_key, get_public_key
+
 
 
 HOST, PORT = "0.0.0.0", 9090
-KEY = 0x55
+KEY = 0x00
+
+PRIME_LENGTH = 2048
+base = 2
+
+prime = generate_prime(PRIME_LENGTH)
+server_private = get_private_key(prime)
+server_public = get_public_key(server_private, prime, base)
 
 
 def handle_client_connection(client_socket):
     try:
+        client_socket.sendall(f"{prime},{base},{server_public}".encode())
+        client_public = int(client_socket.recv(1024).decode())
+        shared_secret = pow(client_public, server_private, prime)
+        KEY = derive_aes_key(shared_secret)
+        print("Key successfully generated")
         while True:
             data = client_socket.recv(1024)
             if not data:
                 break
-            data =  xor_encrypt_decrypt(data, KEY)
+            data =  aes_decrypt(data, KEY)
             #data = xor_encrypt_decrypt(data, KEY)
             print(f"Received: {data.decode()}")
             
-            # echo the message back to the client
+            #echo the message back to the client
             #client_socket.send(data)
     finally:
         client_socket.close()
