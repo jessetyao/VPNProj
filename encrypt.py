@@ -10,14 +10,12 @@ def derive_aes_key(shared_secret):
     return hash.digest()
 
 def aes_encrypt(data, key):
-    """Encrypt data using AES."""
     cipher = AES.new(key, AES.MODE_CBC)
     ct_bytes = cipher.encrypt(pad(data, AES.block_size))
     iv = cipher.iv
     return iv + ct_bytes
 
 def aes_decrypt(data, key):
-    """Decrypt data using AES."""
     iv = data[:AES.block_size]
     ct = data[AES.block_size:]
     cipher = AES.new(key, AES.MODE_CBC, iv)

@@ -19,7 +19,9 @@ server_public = get_public_key(server_private, prime, base)
 def handle_client_connection(client_socket):
     try:
         client_socket.sendall(f"{prime},{base},{server_public}".encode())
-        client_public = int(client_socket.recv(1024).decode())
+        client_public_and_address = client_socket.recv(1024).decode()
+        client_public, available_addresses = int(client_public_and_address.split(",")[0]), client_public_and_address.split(",")[1:]
+        print(available_addresses)
         shared_secret = pow(client_public, server_private, prime)
         KEY = derive_aes_key(shared_secret)
         print("Key successfully generated")
@@ -27,9 +29,16 @@ def handle_client_connection(client_socket):
             data = client_socket.recv(1024)
             if not data:
                 break
-            data =  aes_decrypt(data, KEY)
-            #data = xor_encrypt_decrypt(data, KEY)
-            print(f"Received: {data.decode()}")
+            data =  aes_decrypt(data, KEY).decode()
+            if data.startswith("UPDATE_ADDRESS"):
+                _, new_address = data.split(',')
+                if new_address not in available_addresses:
+                    print("Invalid address")
+                    
+                    break
+                print(f"Client has updated its address to: {new_address}")
+            else:
+                print(f"Received: {data}")
             
             #echo the message back to the client
             #client_socket.send(data)
