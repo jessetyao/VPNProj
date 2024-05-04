@@ -61,7 +61,7 @@ The last protocol of the IKEv2 that was implemented was the Mobility and Multiho
 \\
 At the beginning of the connection, the client transmits a packet to the server featuring a specialized header, which includes a dynamically changing list of all (n) accessible addresses known as the peer address set. The server, similarly, has several addresses (m) to choose from, so there are a total of n × m address pair combinations that can be potentially used.  Several factors influence which address pairs are ultimately used, including, but not limited to, performance, cost, or being unusable due to incompatible IP versions, network outages, or miscellaneous link issues at either end.\\
 \\
-In MOBIKE specifically, the responsibility for selecting the appropriate address pair for the security associations (SAs) falls to the client; the server simply provides its available addresses to the client and waits for a packet with an update on their decision [5]. The details of exactly how the client picks the address pair, how congestion information is collected, how to dynamically alter the peer address set, or when to change the address pair are outside the scope of MOBIKE and are therefore omitted from the implementation as well.\\
+In MOBIKE specifically, the responsibility for selecting the appropriate address pair for the security associations (SAs) falls to the client; the server simply provides its available addresses to the client and waits for a packet with an update on their decision [9]. The details of exactly how the client picks the address pair, how congestion information is collected, how to dynamically alter the peer address set, or when to change the address pair are outside the scope of MOBIKE and are therefore omitted from the implementation as well.\\
 \\
 Since the client decides the pair, it has full control on the address it wants to connect with. If it decides to change its address, the client simply sends another packet with a unique header notifying the server of the switch. If the IP address is within the peer address set, MOBIKE allows the server and client to remain connected; if not, the server will immediately disconnect the connection as it will be seen as a third party. (Note that with AES this never happens as to send such a message one needs the correct encryption). On a side note, it also supports network address translation (NAT) traversal with its IP addresses.
 \section{Encryption Techniques}
@@ -76,7 +76,7 @@ Diffie-Hellman key exchange initiates with the server and client agreeing with a
 \begin{equation}
 (b^{s_1} mod p)^{s_2} = (b^{s_2} mod p)^{s_1}
 \end{equation}
-where $p$ is the 2048 bit prime, $b$ is the base, $s_1$ and $s_2$ is the server and client private key,  respectively, and $b^{s_1}$ and $b^{s_2}$ is the client and private public key, respectively. Cracking this is a famous exponential time algorithm, and for a 1024 bit prime and “nation-state resources,” it can be cracked within a year for around 100 million US dollars - a 2048 bit prime would be exponentially harder to crack.
+where $p$ is the 2048 bit prime, $b$ is the base, $s_1$ and $s_2$ is the server and client private key,  respectively, and $b^{s_1}$ and $b^{s_2}$ is the client and private public key, respectively. Cracking this is a famous exponential time algorithm, and for a 1024 bit prime and “nation-state resources,” it can be cracked within a year for around 100 million US dollars [5] - a 2048 bit prime would be exponentially harder to crack.
 
 \begin{figure}[h]
     \centering
@@ -86,11 +86,11 @@ where $p$ is the 2048 bit prime, $b$ is the base, $s_1$ and $s_2$ is the server 
 \end{figure}
 
 \subsection{Advanced Encryption Standard (AES)}
-As mentioned before, IKEv2 specifically uses AES-256, which uses a 256 bit key and a total of 14 rounds. AES begins with what’s known as key expansion; intuitively, it expands the key to its desired 256 bits and creates 15 different round keys (one for initialization and one for each round). Naturally, the details are significantly more nuanced and complex, which have been omitted in this paper, so, for further details, refer to here [2]. Next, it arranges the 128-bit packet in row-major order with one transformed byte in each of the 16 squares, where a transformed byte is defined by combining said byte with a round key through a bitwise XOR. Canonical, this XOR operation is known as the AddRoundKey operation because XOR is the add operation of the finite field. After this initial setup, AES starts its first round.\\
+As mentioned before, IKEv2 specifically uses AES-256, which uses a 256 bit key and a total of 14 rounds. AES begins with what’s known as key expansion; intuitively, it expands the key to its desired 256 bits and creates 15 different round keys (one for initialization and one for each round). Naturally, the details are significantly more nuanced and complex, which have been omitted in this paper, so, for further details, refer to here [6]. Next, it arranges the 128-bit packet in row-major order with one transformed byte in each of the 16 squares, where a transformed byte is defined by combining said byte with a round key through a bitwise XOR. Canonical, this XOR operation is known as the AddRoundKey operation because XOR is the add operation of the finite field. After this initial setup, AES starts its first round.\\
 \\
 For AES-256 and IKEv2, there are 4 operations per round and 14 total rounds.\\
 \\
-The first operation is known as SubBytes, and, as the name suggests, substitutes every byte through a substitution box or S-box, which is just a nonlinear vectorial boolean function [3]. Additionally, the substitutions come with two rules: 1. there are no fixed points (a byte can not substitute with itself), and 2. there are no opposite fixed points (a byte can not substitute with a bitflip of itself). Note that the S-box is just a table look up, so the entire process is very efficient.\\
+The first operation is known as SubBytes, and, as the name suggests, substitutes every byte through a substitution box or S-box, which is just a nonlinear vectorial boolean function [7]. Additionally, the substitutions come with two rules: 1. there are no fixed points (a byte can not substitute with itself), and 2. there are no opposite fixed points (a byte can not substitute with a bitflip of itself). Note that the S-box is just a table look up, so the entire process is very efficient.\\
 \\
 The next operation, ShiftRows, is also intuitively very straightforward. Simply, do not move the first row and shift the second, third, and fourth row by one, two, and three to the left, respectively, while looping back around.\\
 \\
@@ -98,7 +98,7 @@ Similarly, AES also mixes the columns, which is canonically known as MixColumns.
 \\
 Finally, to finish off the round, AddRoundKey is applied again, resulting in a 128 bit block of seemingly gibberish. Perform these rounds thirteen more times, and the result is AES. The final output of the last round’s AddRoundKey will be what is sent over the channel for the server or client to decrypt.\\
 \\
-The 128-bit cypher has never been broken before, and the 256 bit cypher is approximately $340 \times 10^{36}$ times more difficult to crack.
+The 128-bit cypher has never been broken before, and the 256 bit cypher is approximately $340 \times 10^{36}$ times more difficult to crack. [8]
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\linewidth]{aes_1.png}
