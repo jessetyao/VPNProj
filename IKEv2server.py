@@ -3,8 +3,6 @@ import threading
 from encrypt import derive_aes_key, aes_decrypt
 from dh import generate_prime, get_private_key, get_public_key
 
-
-
 HOST, PORT = "0.0.0.0", 9090
 KEY = 0x00
 

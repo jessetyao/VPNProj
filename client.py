@@ -1,8 +1,6 @@
 import socket
 
-
 SERVER_IP, PORT = 'localhost', 9090
-
 
 def connect_to_server(server_ip, port):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
