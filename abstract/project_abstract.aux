@@ -1,28 +1,47 @@
 \relax 
-\@writefile{toc}{\contentsline {title}{Security and Performance Analysis of Virtual Private Network Implementations}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {title}{VPN Security and Performance Analysis}{1}{}\protected@file@percent }
 \@writefile{toc}{\authcount {3}}
 \@writefile{toc}{\contentsline {author}{Jesse Yao \and Divit Rawal \and Jen-Chun Tien}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Virtual Private Networks}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Popular VPN Protocols}{1}{}\protected@file@percent }
+\citation{ms_pptp}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Point-to-Point Tunneling Protocol (PPTP)}{2}{}\protected@file@percent }
+\citation{ikev2_mobike}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Internet Key Exchange Version 2 (IKEv2)}{3}{}\protected@file@percent }
+\citation{ibm_psk}
+\citation{arc4}
+\citation{ms-chap}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Encryption Techniques}{5}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Pre-Shared Key}{5}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Rivest Cipher 4 (ARC4)}{5}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Microsoft Challenge Handshake Authentication Protocol (MS-CHAP)}{5}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Diffie-Hellman Key Exchange}{5}{}\protected@file@percent }
+\citation{imperfect_fs}
+\citation{improved_aes}
+\citation{generalities_vectorial}
+\citation{aes_study}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The total time in milliseconds the Diffie-Hellman key exchange takes depending on the size of the prime number. Note that the y-axis is logged, which means the server takes significantly longer time to set up. This is due to the fact that the server is the one generating the shared prime number, which is done at the server set up phase. }}{6}{}\protected@file@percent }
-\newlabel{fig:Time to Crack Diffie-Hellman Key Exchange}{{1}{6}{}{}{}}
+\newlabel{fig:Time to Crack Diffie-Hellman Key Exchange}{{1}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Advanced Encryption Standard (AES)}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Analysis}{7}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Security}{7}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The total time in milliseconds AES to encrypt and decrypt messages. These extremely quick speeds are due to the fact that AES operations are built into modern day CPUs.}}{8}{}\protected@file@percent }
-\newlabel{fig:Time for Encryption and Decryption using AES}{{2}{8}{}{}{}}
+\newlabel{fig:Time for Encryption and Decryption using AES}{{2}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Performance}{8}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Compatibility}{8}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Ease of Implementation}{8}{}\protected@file@percent }
-\bibstyle{splncs04}
-\bibdata{bibliography.bib}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Overall}{9}{}\protected@file@percent }
-\gdef \@abspage@last{9}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix: Implementation Details}{9}{}\protected@file@percent }
+\bibstyle{splncs04}
+\bibdata{bibliography}
+\bibcite{imperfect_fs}{1}
+\bibcite{generalities_vectorial}{2}
+\bibcite{ms-chap}{3}
+\bibcite{ms_pptp}{4}
+\bibcite{ikev2_mobike}{5}
+\bibcite{ibm_psk}{6}
+\bibcite{aes_study}{7}
+\bibcite{arc4}{8}
+\bibcite{improved_aes}{9}
+\gdef \@abspage@last{10}

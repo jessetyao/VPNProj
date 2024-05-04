@@ -1,0 +1,43 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{imperfect_fs}
+Adrian, D.e.a.: Imperfect forward secrecy: How diffie-hellman fails in practice
+  (2019), \url{https://weakdh.org/imperfect-forward-secrecy-ccs15.pdf}
+
+\bibitem{generalities_vectorial}
+Carlet, C.: Generalities on vectorial boolean functions (nd),
+  \url{https://www.math.univ-paris13.fr/~carlet/chap-vectorial-fcts-corr.pdf}
+
+\bibitem{ms-chap}
+Corporation, M.: Ms-chap overview (2021),
+  \url{https://learn.microsoft.com/en-us/openspecs/windows\string_protocols/ms-chap/4740bf05-db7e-4542-998f-5a4478768438}
+
+\bibitem{ms_pptp}
+Corporation, M.: Point-to-point tunneling protocol (pptp) profile (2021),
+  \url{https://learn.microsoft.com/en-us/openspecs/windows\string_protocols/ms-ptpt/32e8cf6d-2e0d-4843-8dc0-a4934e16e1f5}
+
+\bibitem{ikev2_mobike}
+Eronen, P.: {IKEv2 Mobility and Multihoming Protocol (MOBIKE)} (2006),
+  \url{https://www.rfc-editor.org/rfc/rfc4555\#page-5}
+
+\bibitem{ibm_psk}
+IBM: Pre-shared key (2021),
+  \url{https://www.ibm.com/docs/en/zos/2.4.0?topic=authentication-pre-shared-key}
+
+\bibitem{aes_study}
+Sousi, A.L., Yehya, D., Joudi, M.: Aes encryption: Study \& evaluation (2020),
+  \url{https://www.researchgate.net/publication/346446212\string_AES\string_Encryption\string_Study\string_Evaluation}
+
+\bibitem{arc4}
+University, C.: The rc4 stream encryption algorithm (2005),
+  \url{https://people.computing.clemson.edu/~jmarty/courses/commonCourseContent/AdvancedModule-SecurityConceptsAndApplicationToLinux/RC4ALGORITHM-Stallings.pdf}
+
+\bibitem{improved_aes}
+Yan, J., Chen, F.: An improved aes key expansion algorithm (2016).
+  \doi{10.2991/icemie-16.2016.28},
+  \url{https://www.researchgate.net/publication/303481390\string_An\string_Improved\string_AES\string_Key\string_Expansion\string_Algorithm}
+
+\end{thebibliography}
